@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import { tradeData } from "./data";
 import { Typography, Paper } from "material-ui-next";
 
 const styles = {
@@ -7,7 +8,7 @@ const styles = {
   textAlign: "center"
 };
 
-const App = () => (
+const TradeLoopAnalyser = () => (
   <div style={styles}>
     <Paper>
       <Typography />
@@ -15,4 +16,4 @@ const App = () => (
   </div>
 );
 
-render(<App />, document.getElementById("root"));
+render(<TradeLoopAnalyser />, document.getElementById("root"));

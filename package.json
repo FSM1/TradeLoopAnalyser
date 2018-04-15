@@ -1,7 +1,7 @@
 {
-  "name": "trade-loop-analyser-widget",
+  "name": "trade-loop-analyser",
   "version": "1.0.0",
-  "description": "",
+  "description": "Determines whether it is better to HODL or hop",
   "keywords": [],
   "homepage": "https://codesandbox.io/s/new",
   "main": "src/index.js",
