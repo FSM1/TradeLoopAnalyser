@@ -5,11 +5,11 @@ import { Typography, Paper } from "material-ui-next";
 import Slider from "rc-slider";
 import { LineChart, Line } from "recharts";
 
-const TradeGraph = chartData => {
-  console.log(chartData);
+const TradeGraph = props => {
+  console.log(props);
   return (
     <div>
-      <LineChart width={300} height={300} data={chartData}>
+      <LineChart width={300} height={300} data={props.chartData}>
         <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
       </LineChart>
     </div>
@@ -32,13 +32,11 @@ const SelectorSlider = () => {
   );
 };
 
-const ResultDisplay = ({ Direct, Route }) => {
-  console.log(Direct);
-  console.log(Route);
+const ResultDisplay = props => {
   return (
     <div>
-      <Typography>HODL: {Direct}</Typography>
-      <Typography>Route: {Route}</Typography>
+      <Typography>HODL: {props.resultData.Direct}</Typography>
+      <Typography>Route: {props.resultData.Route}</Typography>
     </div>
   );
 };
