@@ -1,15 +1,17 @@
 {
   "name": "trade-loop-analyser",
   "version": "1.0.0",
-  "description": "Determines whether it is better to HODL or hop",
+  "description": "Determines whether it is better to have HODL'ed or hopped",
   "keywords": [],
   "homepage": "https://codesandbox.io/s/new",
   "main": "src/index.js",
   "dependencies": {
     "material-ui-next": "1.0.0-beta.40",
+    "rc-slider": "8.6.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "recharts": "1.0.0-beta.10"
   },
   "devDependencies": {},
   "scripts": {
