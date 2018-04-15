@@ -4,6 +4,7 @@ import { tradeData } from "./data";
 import { Typography, Paper } from "material-ui-next";
 import Slider from "rc-slider";
 import { LineChart, Line } from "recharts";
+import "rc-slider/assets/index.css";
 
 const TradeGraph = props => {
   console.log(props);
@@ -27,7 +28,7 @@ const SelectorSlider = () => {
   return (
     <div style={sliderStyle}>
       <Typography>Slider</Typography>
-      <Range allowCross={false} defaultValue={[0, 20]} onChange={log} />
+      <Range defaultValue={[0, 20]} min={0} max={50} onChange={log} step={10} />
     </div>
   );
 };

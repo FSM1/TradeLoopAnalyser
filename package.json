@@ -1,9 +1,9 @@
 {
   "name": "trade-loop-analyser",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Determines whether it is better to have HODL'ed or hopped",
   "keywords": [],
-  "homepage": "https://codesandbox.io/s/new",
+  "homepage": "",
   "main": "src/index.js",
   "dependencies": {
     "material-ui-next": "1.0.0-beta.40",
