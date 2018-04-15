@@ -1,2 +1,0 @@
-# TradeLoopAnalyser
-Created with CodeSandbox
