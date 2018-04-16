@@ -6,6 +6,7 @@
   "homepage": "",
   "main": "src/index.js",
   "dependencies": {
+    "Math": "0.0.1-security",
     "material-ui-next": "1.0.0-beta.40",
     "rc-slider": "8.6.1",
     "react": "16.2.0",
