@@ -17,25 +17,25 @@ const tradeData = {
       fromSymbol: "ETH",
       toSymbol: "EOS",
       price: 7.5
+    },
+    {
+      id: 4,
+      fromSymbol: "EOS",
+      toSymbol: "BTC",
+      price: 50
+    },
+    {
+      id: 5,
+      fromSymbol: "BTC",
+      toSymbol: "ETH",
+      price: 0.36
+    },
+    {
+      id: 6,
+      fromSymbol: "ETH",
+      toSymbol: "EOS",
+      price: 45
     }
-    //    {
-    //      id: 4,
-    //      fromSymbol: "EOS",
-    //      toSymbol: "BTC",
-    //      price: 50
-    //    },
-    //    {
-    //      id: 5,
-    //      fromSymbol: "BTC",
-    //      toSymbol: "ETH",
-    //      price: 0.36
-    //    },
-    //    {
-    //      id: 6,
-    //      fromSymbol: "ETH",
-    //     toSymbol: "EOS",
-    //      price: 45
-    //    }
   ]
 };
 
@@ -54,7 +54,6 @@ function exchangeRateAtTime(fromSymbol, toSymbol, time) {
   const random = Math.floor(Math.random() * 20) - 10;
   let result = baseRate;
   for (var i = 0; i < time; i++) {
-    console.log("adding random");
     result = baseRate * (1 + random / 100);
   }
   return result;
