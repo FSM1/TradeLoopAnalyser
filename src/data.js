@@ -50,7 +50,6 @@ function exchangeRateAtTime(fromSymbol, toSymbol, time) {
   };
 
   const baseRate = baseRates[pair];
-  //console.log("Base rate: " + baseRate);
   const random = Math.floor(Math.random() * 20) - 10;
   let result = baseRate;
   for (var i = 0; i < time; i++) {
