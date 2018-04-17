@@ -22,19 +22,19 @@ const tradeData = {
       id: 4,
       fromSymbol: "EOS",
       toSymbol: "BTC",
-      price: 50
+      price: 0.3
     },
     {
       id: 5,
       fromSymbol: "BTC",
       toSymbol: "ETH",
-      price: 0.36
+      price: 0.66
     },
     {
       id: 6,
       fromSymbol: "ETH",
       toSymbol: "EOS",
-      price: 45
+      price: 9.7
     }
   ]
 };
@@ -43,10 +43,17 @@ const tradeData = {
 // This would be a query to an internal API
 function exchangeRateAtTime(fromSymbol, toSymbol, time) {
   const pair = fromSymbol + toSymbol;
+  console.log(fromSymbol, " ", toSymbol);
   const baseRates = {
     ZARBTC: 25,
     BTCETH: 0.41,
-    ZAREOS: 87
+    ZARETH: 10,
+    ZAREOS: 87,
+    BTCEOS: 0.3,
+    ETHEOS: 8.2,
+    EOSEOS: 1,
+    BTCBTC: 1,
+    ETHETH: 1,
   };
 
   const baseRate = baseRates[pair];

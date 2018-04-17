@@ -1,18 +1,19 @@
 import React from "react";
 import { render } from "react-dom";
 import { tradeData, exchangeRateAtTime } from "./data";
-import { Typography } from "material-ui-next";
+import { Typography, Table, TableRow, TableCell } from "material-ui-next";
 import Slider from "rc-slider";
-import { LineChart, Line, XAxis, YAxis, Label } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
+
 import "rc-slider/assets/index.css";
 
 const TradeGraph = ({chartData}) => {
-  console.log(chartData);
   return (
     <div>
-      <LineChart width={400} height={300} data={chartData}>
+      <LineChart width={400} height={200} data={chartData}>
         <Line type="linear" dataKey="yLabel" />
         <XAxis dataKey="time"></XAxis>
+        <CartesianGrid stroke="#eee" strokeDasharray="5 5" vertical={false}/>
         <YAxis dataKey="yLabel" type="category" />
       </LineChart>
     </div>
@@ -38,11 +39,19 @@ const SelectorSlider = ({maxValue, onChanged}) => {
   );
 };
 
-const ResultDisplay = props => {
+const ResultDisplay = ({resultData}) => {
   return (
-    <div>
-      <Typography>HODL: {props.resultData.Direct * 100}</Typography>
-      <Typography>Route: {props.resultData.Route * 100}</Typography>
+    <div style={{width: 400}}>
+        <Table >
+            <TableRow>
+                <TableCell>Your Route:</TableCell>
+                <TableCell>{Math.round(resultData.Route * 100)} %</TableCell>
+            </TableRow>
+            <TableRow style={{}}>
+                <TableCell>HODL: </TableCell>
+                <TableCell>{Math.round(resultData.Direct * 100)} %</TableCell>
+            </TableRow>
+        </Table>
     </div>
   );
 };
@@ -75,22 +84,19 @@ class TradeLoopAnalyser extends React.Component {
 
   render() {
     function determineDirectReturn(trades) {
-      console.log(trades);
       const endingValue = exchangeRateAtTime(
         trades[0].fromSymbol,
         trades[trades.length - 1].toSymbol,
         trades.length - 1
       );
 
-      // get Starting Value
       const startingValue = exchangeRateAtTime(
         trades[0].fromSymbol,
         trades[trades.length - 1].toSymbol,
         0
       );
 
-      const result = (endingValue - startingValue) / startingValue;
-      return result;
+      return (endingValue - startingValue) / startingValue;
     }
 
     function determineRouteReturn(trades) {
@@ -102,17 +108,13 @@ class TradeLoopAnalyser extends React.Component {
           return previous * current;
         });
 
-      console.log(trades[0].fromSymbol);
-      console.log(trades[trades.length - 1].toSymbol);
       const startingValue = exchangeRateAtTime(
         trades[0].fromSymbol,
         trades[trades.length - 1].toSymbol,
         0
       );
 
-      const result = (endingValue - startingValue) / startingValue;
-      console.log(endingValue + " - " + startingValue + "=" + result);
-      return result;
+      return (endingValue - startingValue) / startingValue;
     }
 
     const generateGraphData = (trades) => {
