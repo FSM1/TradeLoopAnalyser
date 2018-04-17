@@ -7,7 +7,6 @@ import { LineChart, Line } from "recharts";
 import "rc-slider/assets/index.css";
 
 const TradeGraph = props => {
-  console.log(props);
   return (
     <div>
       <LineChart width={400} height={300} data={props.chartData}>
@@ -17,23 +16,20 @@ const TradeGraph = props => {
   );
 };
 
-const SelectorSlider = () => {
+const SelectorSlider = props => {
   const Range = Slider.Range;
   const sliderStyle = { width: 400 };
-
-  function log(value) {
-    return {};
-  }
 
   return (
     <div style={sliderStyle}>
       <Range
+        dots
         allowCross={false}
-        defaultValue={[0, 20]}
+        defaultValue={[0, props.maxValue]}
         min={0}
-        max={20}
-        onChange={log}
-        step={10}
+        max={props.maxValue}
+        onChange={props.onChanged}
+        step={1}
       />
     </div>
   );
@@ -56,6 +52,14 @@ class TradeLoopAnalyser extends React.Component {
       toIndex: props.trades.length
     };
   }
+
+  handleUpdate = (newRange) => {
+    this.setState({
+        fromIndex: newRange[0],
+        toIndex: newRange[1],
+    })
+  };
+
 
   render() {
     function determineDirectReturn(trades) {
@@ -99,29 +103,32 @@ class TradeLoopAnalyser extends React.Component {
       return result;
     }
 
-    const graphData = tradeData.trades.map(t => ({
+
+
+
+    const graphData = this.props.trades.map(t => ({
       Label: t.fromSymbol,
       Value: t.id
     }));
 
     const newGraphData = function() {
-      //get all the individual currencies
-      const currencies = Array.from(
-        new Set(tradeData.trades.map(t => t.fromSymbol))
-      );
+      const currencies = [...this.props.trades.map(t => t.fromSymbol), ...this.props.trades.map(t => t.toSymbol)];
 
-      //console.log("currencies" + currencies);
+      const StartingPoint = {
+        Time: 0,
+        YLabel:this.props.trades[0].fromSymbol,
+          YValue:currencies.indexOf(this.props.trades[0].fromSymbol)
+      }
 
-      return tradeData.trades.map(t => ({
-        YLabel: t.toSymbol,
-        YValue: currencies.indexOf(t.toSymbol),
-        Time: t.id
-      }));
-      //map each trade to a [currencyEnum,Time] coordinate
-      //with a Currency label
+      return [StartingPoint, ...this.props.trades.map(t => ({
+          YLabel: t.toSymbol,
+          YValue: currencies.indexOf(t.toSymbol),
+          Time: t.id
+        })
+      )];
     };
 
-    console.log(newGraphData());
+    //console.log(newGraphData());
 
     const resultData = {
       Direct: determineDirectReturn(
@@ -135,7 +142,7 @@ class TradeLoopAnalyser extends React.Component {
     return (
       <div>
         <TradeGraph chartData={graphData} />
-        <SelectorSlider />
+        <SelectorSlider maxValue={this.props.trades.length} onChanged={this.handleUpdate} />
         <ResultDisplay resultData={resultData} />
       </div>
     );
